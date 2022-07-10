@@ -36,16 +36,16 @@ public static void main(String[] args) {
 	printsran[5]= "a";
 
     //2. Write a method that takes an array of Strings and prints all the Strings in the array.
-printstring(prints);
+//printstring(prints);
 
 
     //3. Write a method that takes an array of Strings and prints all the Strings in the array
     //   in reverse order.
 
-printstringr(printsr);
+//printstringr(printsr);
 
     //4. Write a method that takes an array of Strings and prints every other String in the array.
-pringstringev(printsev);
+//pringstringev(printsev);
 
     //5. Write a method that takes an array of Strings and prints all the Strings in the array
     //   in a completely random order. Almost every run of the program should result in a different order.
@@ -75,11 +75,11 @@ public static void pringstringev(String[]p) {
 	}
 }
 public static void pringstringrand(String[]p) {
-	int random = 6;
+	
 	for (int i = 0; i < p.length; i++) {
-		
+		int random=6;
 		Random rand = new Random();
-		rand.nextInt(random);
+		random = rand.nextInt(random);
 	
 		System.out.println(p[random]);
 		
