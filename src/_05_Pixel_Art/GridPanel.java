@@ -3,6 +3,7 @@ package _05_Pixel_Art;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.Iterator;
 
 import javax.swing.JPanel;
 import javax.swing.Box.Filler;
@@ -53,9 +54,16 @@ for (int i = 0; i < pixels.length; i++) {
     public void clickPixel(int mouseX, int mouseY) {
         // 5. Use the mouseX and mouseY variables to change the color
         //    of the pixel that was clicked. *HINT* Use the pixel's dimensions.
-    	if (mouseX<pixelWidth||mouseY<pixelHeight) {
-			color =pixels[rows][cols].color;
-		}
+    	for (int i = 0; i < pixels.length ; i++) {
+			for (int j = 0; j < pixels[i].length; j++) {
+				
+			
+		
+    	if (pixels[i][j].x==mouseX&&pixels[i][j].y ==mouseY) {
+    	        color =pixels[i][j].color;
+    	}
+    	}
+    	}
     }
 
     @Override
@@ -66,7 +74,7 @@ for (int i = 0; i < pixels.length; i++) {
 for (int i = 0; i < pixels.length; i++) {
 	for (int j = 0; j < pixels[i].length; j++) {
 		g.setColor(pixels[i][j].color);
-		g.drawRect(rows, cols, pixelWidth, pixelHeight);
+		g.drawRect(i,j, windowWidth, windowHeight);
 	}
 }
     }
