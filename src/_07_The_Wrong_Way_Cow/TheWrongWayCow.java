@@ -50,149 +50,125 @@ package _07_The_Wrong_Way_Cow;
 
 public class TheWrongWayCow {
 
-    public static int[] findWrongWayCow(final char[][] field) {
-        // Fill in the code to return the [col, row] coordinate position of the
-        // head (letter 'c') of the wrong way cow!
-    	int northc = 0;
-    	int southc = 0;
-    	int westc =0;
-    	int eastc =0;
-    	int cowcount=0;
-    	String cowl = new String();
-    	int[] found = new int[2];
-    
-for (int i = 0; i < field.length; i++) {
-	
-	for (int j = 0; j < field.length; j++) {
+	public static int[] findWrongWayCow(final char[][] field) {
+		// Fill in the code to return the [col, row] coordinate position of the
+		// head (letter 'c') of the wrong way cow!
+		int northc = 0;
+		int southc = 0;
+		int westc = 0;
+		int eastc = 0;
+		int cowcount = 0;
 		
-		//find most common cow
-		if (cowcount >= 2) {
-			if (northc >2) {
-				cowl = "north";
-			}
-			if (southc >2) {
-				cowl = "south";
-			}
-			if (eastc > 2) {
-				cowl = "east";
-			}
-			if (westc >2) {
-				cowl = "west";
+		int[][] cowhead = new int[4][2];
+
+		for (int i = 0; i < field.length; i++) {
+
+			for (int j = 0; j < field[i].length; j++) {
+
+				// find most common cow
+				
+
+				// if (cowcount<=5) {
+				// break;
+				// }
+
+				char car = field[i][j];
+
+				if ('c' == car) {
+					// north
+					if (i > 2) {
+
+						
+							char carn = field[i][j];
+
+							carn = field[i - 1][j];
+
+							if (carn == 'o') {
+								if (field[i-2][j]== 'w') {
+								northc = northc + 1;
+								cowcount = cowcount + 1;
+								System.out.println(cowcount);
+								cowhead[0] = new int[] {j,i};
+								}
+
+							} 
+						
+					}
+					if (i + 2 < field.length) {
+
+						// south
+						
+							char cars = field[i][j];
+
+							cars = field[i + 1][j];
+
+							if (cars == 'o') {
+								if (field[i+2][j]== 'w') {
+								southc = southc + 1;
+								cowcount = cowcount + 1;
+								cowhead[1] = new int[] {j,i};
+								}
+							} 
+						
+					}
+					// east
+					if (j>=2) {
+
+						
+
+							char care = field[i][j];
+
+							care = field[i][j - 1];
+
+							if (care == 'o') {
+								if (field[i][j-2]== 'w') {
+								eastc = eastc + 1;
+								cowcount = cowcount + 1;
+								cowhead[2] = new int[] {j,i};
+								}
+							} 
+						
+					}
+					// west
+
+					if (j<field[i].length-2) {
+						
+							char carw = field[i][j];
+
+							carw = field[i][j + 1];
+
+							if (carw == 'o') {
+								if (field[i][j+2]== 'w') {
+									
+								
+								westc = westc + 1;
+								cowcount = cowcount + 1;
+								cowhead[3] = new int[] {j,i};
+								}
+							} 
+						}
+					
+
+				}
+
 			}
 		}
-		System.out.println(cowcount);
-		//if (cowcount<=5) {
-		//	break;
-		//}
 		
-		
-		char car = field[i][j];
-		String ca = new String();
-		ca.valueOf(car);
-		if (ca == "c"){
-			//north 
-			if (i>2) {
-				
-			if (cowl == "north") {
-				continue;
-			}
-			else {
-			char carn = field[i][j];
-			String can = new String();
-				carn = field[i-1][j];
-				can.valueOf(carn);
-				if (can == "o") {
-					northc = northc+1;
-					cowcount = cowcount+1;
-					
-					found[0] =	j;
-					found[1]=i;
-				}
-				else
-				{continue;
-					
-				}
-			}
-			}
-			//south
-			if (cowl == "south") {
-				continue;
-			}
-			else {
-				char cars = field[i][j];
-				String cas = new String();
-					cars = field[i+1][j];
-					cas.valueOf(cars);
-					if (cas == "o") {
-						southc = southc+1;
-						cowcount = cowcount+1;
-						
-					found[0] =	j;
-					found[1]=i;
-					}
-					else
-					{continue;
-						
-					}
-			}
-			//east
-			
-				if (cowl == "east") {
-					continue;
-				}
-				else {
-				
-				char care = field[i][j];
-				String cae = new String();
-					care = field[i][j+1];
-					cae.valueOf(care);
-					if (cae == "o") {
-						eastc = eastc+1;
-						cowcount = cowcount+1;
-						
-						found[0] =	j;
-						found[1]=i;
-					}
-					else
-					{continue;
-						
-					}
-				}
-			
-			//west
-			
-				
-				if (cowl == "west") {
-					continue;
-				}
-				else {
-				char carw = field[i][j];
-				String caw = new String();
-					carw = field[i][j-1];
-					caw.valueOf(carw);
-					if (caw == "o") {
-						westc = westc+1;
-						cowcount = cowcount+1;
-						found[0] =	j;
-						found[1]=i;
-					}
-					else
-					{continue;
-						
-					}
-				}
-			}
-		
-			
-			
-			
-			
-			
+		if (northc == 1) {
+			return cowhead[0];
 		}
-		
+		if (southc == 1) {
+			return cowhead[1];
+		}
+		if (eastc == 1) {
+			return cowhead[2];
+		}
+		if (westc == 1) {
+			return cowhead[3];
+		}
+		else {
+		return null;
+		}
 		
 	}
-System.out.println(found);
-        return found ;
-    }
 }
